@@ -1,10 +1,8 @@
 function deepClone(source, cache = new WeakMap()) {
-    // 1. Обработка примитивных типов и null/undefined
     if (source === null || typeof source !== 'object') {
         return source;
     }
 
-    // 2. Проверка на циклические ссылки
     if (cache.has(source)) {
         return cache.get(source);
     }
@@ -40,7 +38,6 @@ function deepClone(source, cache = new WeakMap()) {
         return copy;
     }
 
-    // 7. Обработка массива
     if (Array.isArray(source)) {
         const copy = [];
         cache.set(source, copy);
@@ -141,7 +138,7 @@ console.log('\n=== 6. Символы ===');
 const sym = Symbol('test');
 const symbolObj = { [sym]: 'symbol value', regular: 'regular value' };
 const clonedSymbolObj = deepClone(symbolObj);
-console.log('✅ Символ скопирован:', clonedSymbolObj[sym] === 'symbol value');
+console.log('Символ скопирован:', clonedSymbolObj[sym] === 'symbol value');
 
 console.log('\n=== 7. Геттеры и сеттеры ===');
 const getterObj = {
@@ -151,8 +148,8 @@ const getterObj = {
 };
 const clonedGetterObj = deepClone(getterObj);
 clonedGetterObj.value = 100;
-console.log('✅ Геттер скопирован (значение из копии):', clonedGetterObj.value === 100);
-console.log('✅ Оригинал не изменился:', getterObj.value === 42);
+console.log('Геттер скопирован (значение из копии):', clonedGetterObj.value === 100);
+console.log('Оригинал не изменился:', getterObj.value === 42);
 
 console.log('\n=== 8. Прототипы и классы ===');
 class Animal {
